@@ -21,4 +21,11 @@ redis:
   db: 0
   minIdleConnections: 100
   poolSize: 5000
-  poolTimeout: 240        
+  poolTimeout: 240  
+password:
+  includeChars: true
+  includeDigits: true
+  minLength: 6
+  maxLength: 6
+  includeUppercase: true
+  includeLowercase: true            
