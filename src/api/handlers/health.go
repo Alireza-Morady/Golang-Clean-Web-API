@@ -4,6 +4,7 @@ import (
 	// "fmt"
 	"net/http"
 
+	"github.com/Alireza-Morady/Golang-Clean-Web-API.git/api/helper"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,6 +17,6 @@ func NewHealthHnadler() *HealthHandler{
 }
 
 func (h *HealthHandler) Health(c *gin.Context){
-	c.JSON(http.StatusOK,"yeah Working!!")
+	c.JSON(http.StatusOK,helper.GenerateBaseResponse("working",true,0))
 }
 

@@ -28,4 +28,6 @@ password:
   minLength: 6
   maxLength: 6
   includeUppercase: true
-  includeLowercase: true            
+  includeLowercase: true
+Cors:
+  allowOrigins: "http://localhost:3000"             

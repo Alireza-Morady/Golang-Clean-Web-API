@@ -4,12 +4,8 @@ import (
 	"github.com/Alireza-Morady/Golang-Clean-Web-API.git/api/handlers"
 	"github.com/gin-gonic/gin"
 )
-
-
 func Health(r *gin.RouterGroup){
+	h := handlers.NewHealthHnadler()
 
-	handler := handlers.NewHealthHnadler()
-
-	r.GET("/",handler.Health)
-	
+	r.GET("/",h.Health)
 }

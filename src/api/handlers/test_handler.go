@@ -3,6 +3,8 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/Alireza-Morady/Golang-Clean-Web-API.git/api/helper"
+	"github.com/Alireza-Morady/Golang-Clean-Web-API.git/api/validation"
 	"github.com/gin-gonic/gin"
 )
 
@@ -114,15 +116,15 @@ func (h *TestHandler) BodyBinder(c *gin.Context) {
 	p := PersonData{}
 	err := c.ShouldBindJSON(&p)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
-			"validattionError": err.Error(),
-		})
+		c.AbortWithStatusJSON(http.StatusBadRequest,helper.GenerateBaseResponsiveWithValidationError("bad request",false,http.StatusBadRequest,err,validation.ValidationError{}))
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"result": "BodyBinder",
-		"person": p,
-	})
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"result": "BodyBinder",
+	// 	"person": p,
+	// })
+	c.JSON(http.StatusOK,helper.GenerateBaseResponse(p,true,200))
+
 }
 
 func (h *TestHandler) FormBinder(c *gin.Context) {

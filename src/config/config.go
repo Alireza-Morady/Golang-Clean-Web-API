@@ -13,6 +13,11 @@ type Config struct {
 	Postgres PostgresConfig
 	Reids    RedisConfig
 	Password PasswordConfig
+	Cors     CorsConfig
+}
+
+type CorsConfig struct {
+	AllowOrigins string
 }
 
 type ServerConfig struct {
