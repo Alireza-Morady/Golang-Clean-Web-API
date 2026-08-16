@@ -9,19 +9,25 @@ cores:
   allowOrigins: "*"
 postgres:
   host: localhost
-  port: 5432
-  user: admin
+  port: 5433
+  user: postgres
   password: admin
   dbName: car_sale_db
-  sslMode: false
+  sslMode: disable
+  maxIdleConns: 15
+  maxOpenConns: 100
+  connMaxLifetime: 5
 redis:
   host: localhost
   port: 6379
   password: password
   db: 0
-  minIdleConnections: 100
-  poolSize: 5000
-  poolTimeout: 240  
+  dialTimeout: 5
+  reedTimeout: 5  
+  writeTimeout: 5  
+  poolSize: 10
+  poolTimeout: 15
+  idleCheckFrequency: 500
 password:
   includeChars: true
   includeDigits: true
