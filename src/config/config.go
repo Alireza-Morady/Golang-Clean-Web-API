@@ -12,9 +12,16 @@ import (
 type Config struct {
 	Server   ServerConfig
 	Postgres PostgresConfig
-	Reids    RedisConfig
+	Redis    RedisConfig
 	Password PasswordConfig
 	Cors     CorsConfig
+	Logger   LoggerConfig
+}
+
+type LoggerConfig struct {
+	FilePath string
+	Encoding string
+	Level    string
 }
 
 type CorsConfig struct {
@@ -44,8 +51,8 @@ type RedisConfig struct {
 	Password           string
 	Db                 string
 	DialTimeout        time.Duration
-	ReadlTimeout       time.Duration
-	WritelTimeout      time.Duration
+	ReadTimeout       time.Duration
+	WriteTimeout      time.Duration
 	IdleCheckFrequency time.Duration
 	PoolSize           int
 	PoolTimeout        time.Duration
@@ -74,13 +81,22 @@ func GetConfig() *Config {
 }
 
 func ParserConfig(v *viper.Viper) (*Config, error) {
-	var cfg Config
-	err := v.Unmarshal(&cfg)
-	if err != nil {
-		log.Printf("Unable to parse config: %v", err)
-		return nil, err
-	}
-	return &cfg, nil
+    var cfg Config
+
+    log.Printf("Redis from Viper: %#v", v.Get("redis"))
+    log.Printf("Redis host: %v", v.Get("redis.host"))
+    log.Printf("Redis port: %v", v.Get("redis.port"))
+    log.Printf("Redis password: %v", v.Get("redis.password"))
+
+    err := v.Unmarshal(&cfg)
+    if err != nil {
+        log.Printf("Unable to parse config: %v", err)
+        return nil, err
+    }
+
+    log.Printf("Redis after unmarshal: %+v", cfg.Redis)
+
+    return &cfg, nil
 }
 
 func LoadConfig(filename string, fileType string) (*viper.Viper, error) {

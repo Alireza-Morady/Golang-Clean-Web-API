@@ -12,17 +12,17 @@ var redisClient *redis.Client
 
 func InitRedis(cfg *config.Config)error{
 
-	var rdsConfig = &cfg.Reids
+	var rdsConfig = &cfg.Redis
 
 	redisClient = redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf("%s:%s",rdsConfig.Host,rdsConfig.Port),
 		Password: rdsConfig.Password,
 		DB: 0,
 		DialTimeout: rdsConfig.DialTimeout * time.Second,
-		ReadTimeout: rdsConfig.DialTimeout * time.Second,
-		WriteTimeout: rdsConfig.DialTimeout * time.Second,
+		ReadTimeout: rdsConfig.ReadTimeout * time.Second,
+		WriteTimeout: rdsConfig.WriteTimeout * time.Second,
 		PoolSize: rdsConfig.PoolSize,
-		PoolTimeout: rdsConfig.PoolTimeout * time.Second,
+		PoolTimeout: rdsConfig.PoolTimeout,
 		IdleTimeout: 500 * time.Millisecond,
 		IdleCheckFrequency: rdsConfig.IdleCheckFrequency * time.Millisecond,
 	})

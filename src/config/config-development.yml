@@ -23,8 +23,8 @@ redis:
   password: password
   db: 0
   dialTimeout: 5
-  reedTimeout: 5  
-  writeTimeout: 5  
+  readTimeout: 5
+  writeTimeout: 5
   poolSize: 10
   poolTimeout: 15
   idleCheckFrequency: 500
